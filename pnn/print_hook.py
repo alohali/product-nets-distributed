@@ -71,7 +71,7 @@ class PrintHook:
 
     # pass all other methods to __stdout__ so that we don't have to override them
     def __getattr__(self, name):
-        return self.origOut.__getattr__(name)
+        return getattr(self.origOut, name)
 
 
 if __name__ == '__main__':
@@ -89,15 +89,10 @@ if __name__ == '__main__':
         return 1, 1, 'Err Hooked:' + text
 
 
-    print 'Hook Start'
     phOut = PrintHook()
     phOut.Start(MyHookOut)
     phErr = PrintHook(0)
     phErr.Start(MyHookErr)
-    print 'Is this working?'
-    print 'It seems so!'
     phOut.Stop()
-    print 'STDOUT Hook end'
     compile(',', '<string>', 'exec')
     phErr.Stop()
-    print 'Hook end'

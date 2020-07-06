@@ -222,9 +222,9 @@ class Trainer:
         return str(timedelta(seconds=eta))
 
     def dump_config(self):
-        for k, v in getattr(FLAGS, '__flags').iteritems():
+        for k, v in getattr(FLAGS, '__flags').items():
             self.config[k] = getattr(FLAGS, k)
-        for k, v in __init__.config.iteritems():
+        for k, v in __init__.config.items():
             if k != 'default':
                 self.config[k] = v
         self.config['train_data_param'] = self.train_data_param
